@@ -1,0 +1,15 @@
+service: blender-latest
+provider:
+  region: eu-central-1
+  name: aws
+  runtime: nodejs12.x
+  stage: dev
+
+functions:
+  blenderLatestHandler:
+    handler: src/blender-latest.handler
+    events:
+      - http:
+          path: /{proxy+}
+          method: GET
+          cors: true
