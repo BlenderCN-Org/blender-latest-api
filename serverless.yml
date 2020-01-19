@@ -13,3 +13,7 @@ functions:
           path: /{proxy+}
           method: GET
           cors: true
+      - http:
+          path: /
+          method: GET
+          cors: true
