@@ -7,7 +7,7 @@ provider:
 
 functions:
   blenderLatestHandler:
-    handler: src/blender-latest.handler
+    handler: src/app.handler
     events:
       - http:
           path: /{proxy+}

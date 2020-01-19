@@ -1,80 +1,99 @@
-# blender-latest
-Blender's download links are all not cURL and wget friendly, also you always need to know the version you want to download.
-`blender-latest` is a simple service redirecting to the offical latest download of Blender.
+# blender-latest-api
+Blender's download links are all not cURL and wget friendly, because you always need to know the version you want to download.
+`blender-latest-api` is a simple service redirecting to the official latest download of Blender.
 
 ## Usage
 The API follows this schema
 
-| Example                  | Base URL               | Platform (optional) | Version (optional) | File type (optional) |
-|--------------------------|------------------------|---------------------|--------------------|----------------------|
-| Latest Windows Installer | https://somewhere.com/ | windows64/          | latest/            | msi                  |
-| 2.81a Linux Archive      | https://somewhere.com/ | linux/              | 2.81a/             | tar.bz2              |
+| Example                  | Base URL               | Version (optional) | Platform (optional) | File type (optional) |
+|--------------------------|------------------------|--------------------|---------------------|----------------------|
+| Latest Windows Installer | https://somewhere.com/ | latest/            | windows64/          | msi                  |
+| 2.81a Linux Archive      | https://somewhere.com/ | 2.81/              | linux/              | bz2                  |
 
 > When you omit an optional parameter the [response will be JSON](#json-response) instead of a redirect to the download.
 
 ### List of available platforms:
-* windows64
+* windows
 * linux
 * macos
 
-### `wget` example
+> The list of available downloads varies from version to version. When in doubt check the [JSON API](#json-response) for available platforms.
+
+### Download example
 
 Example terminal command to download the latest version of Blender for Windows 64 bit as MSI (installer):
 ```
-wget https://somewhere.com/blender/latest/windows64/zip
+wget https://somewhere.com/latest/windows/zip
+```
+> You can also omit the `64` or `32` for most recent versions, because `32` bit is no longer available.
+
+Example terminal command to download version 2.79b of Blender for Linux as tar.bz2:
+```
+wget https://somewhere.com/2.79/linux/bz2
 ```
 
-Example terminal command to download version 2.81a of Blender for Linux x86_64 as tar.bz2:
+> Notice! You can't provide the a, b, c version, because of the mirror structure. The API will pick the most recent sub-version of your desired version.
 
 ### JSON response
 You can also use the API to just find out whats available.
 
+#### List all available versions
+```
+curl https://somewhere.com/
+```
+
+**Example output**
+```JSON
+{"versions":["1.0","1.60","1.73","1.80","latest", ...]}
+```
+
+#### List all downloads available for version
+```
+curl https://somewhere.com/latest
+```
+
+**Example output**
+```JSON
+{
+  "links": [
+    {
+      "platform": "linux",
+      "type": "bz2",
+      "version": "2.81",
+      "link": "https://download.blender.org/release/Blender2.81/blender-2.81-linux-glibc217-x86_64.tar.bz2"
+    },
+    {
+      "platform": "macOS",
+      "type": "dmg",
+      "version": "2.81",
+      "link": "https://download.blender.org/release/Blender2.81/blender-2.81-macOS.dmg"
+    },
+    ...
+  ]
+}
+```
+
 #### List of latest Windows downloads
 ```
-curl https://somewhere.com/windows64/latest/
+curl https://somewhere.com/latest/windows
 ```
 **Example output**
 ```JSON
 {
   "links": [
     {
-      "platform": "windows64", 
-      "type": "MSI",
-      "version": "2.81a",
-      "download": "https://download.blender.org/release/Blender2.81/blender-2.81a-windows64.msi"
+      "platform": "windows64",
+      "type": "msi",
+      "version": "2.81",
+      "link": "https://download.blender.org/release/Blender2.81/blender-2.81-windows64.msi"
     },
     {
-      "platform": "windows64", 
-      "type": "ZIP",
-      "version": "2.81a",
-      "download": "https://download.blender.org/release/Blender2.81/blender-2.81a-windows64.zip"
-    } 
+      "platform": "windows64",
+      "type": "zip",
+      "version": "2.81",
+      "link": "https://download.blender.org/release/Blender2.81/blender-2.81-windows64.zip"
+    },
+    ... 
   ]
 }
 ```
-
-#### List of available version for a specific platform
-```
-curl https://somewhere.com/linux/
-```
-**Example output**
-```JSON
-{
-  "links": [
-    {
-      "platform": "linux", 
-      "type": "TAR.BZ2",
-      "version": "2.81a",
-      "download": "https://download.blender.org/release/Blender2.81/blender-2.81a-linux-glibc217-x86_64.tar.bz2"
-    },
-    {
-      "platform": "windows64", 
-      "type": "TAR.BZ2",
-      "version": "2.81a",
-      "download": "https://download.blender.org/release/Blender2.81/blender-2.81a-linux-glibc217-x86_64.tar.bz2"
-    } 
-  ]
-}
-
-### Why?
-I built an automatic Render Farm based on AWS infrastructure and needed a way to download the always latest Version of blender

@@ -4,12 +4,17 @@
   "description": "API to download Blender via simple permalinks",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/app.js local"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "serverless": "^1.61.2"
+    "cheerio": "^1.0.0-rc.3",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "request": "^2.88.0",
+    "serverless": "^1.61.2",
+    "serverless-http": "^2.3.0",
   }
 }
