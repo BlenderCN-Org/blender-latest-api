@@ -48,7 +48,12 @@ module.exports = {
     }),
     getLinksByPlatform: (version, platform) => new Promise((resolve, reject) => {
         module.exports.getPlatforms(version).then(links => {
-            resolve(links.filter(link => link.platform.toLowerCase().startsWith(platform.toLowerCase())));
+            links = links.filter(link => link.platform.toLowerCase().startsWith(platform.toLowerCase()));
+            if (version.toLowerCase() === "latest") {
+                const latestVersion = findLatest(links.map(link => link.version));
+                links = links.filter(link => link.version === latestVersion);
+            }
+            resolve(links);
         });
     }),
     getDownloadLink: (version, platform, type) => new Promise((resolve, reject) => {
@@ -85,7 +90,6 @@ function findLatest(versions) {
 }
 
 function sortBlenderVersion(a, b) {
-    console.log(a, b);
     if (a !== null && b === null) {
         return 1;
     }
