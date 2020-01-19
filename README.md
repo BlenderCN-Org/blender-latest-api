@@ -5,8 +5,8 @@ Blender's download links are all not cURL and wget friendly, because you always 
 ## Usage
 The API follows this schema
 
-| Example                  | Base URL               | Version (optional) | Platform (optional) | File type (optional) |
-|--------------------------|------------------------|--------------------|---------------------|----------------------|
+| Example                  | Base URL                                                       | Version (optional) | Platform (optional) | File type (optional) |
+|--------------------------|----------------------------------------------------------------|--------------------|---------------------|----------------------|
 | Latest Windows Installer | https://070wwfoovd.execute-api.eu-central-1.amazonaws.com/dev/ | latest/            | windows64/          | msi                  |
 | 2.81a Linux Archive      | https://070wwfoovd.execute-api.eu-central-1.amazonaws.com/dev/ | 2.81/              | linux/              | bz2                  |
 

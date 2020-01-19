@@ -11,6 +11,7 @@ function handleError(err, res) {
 module.exports = {
     getAllVersions: (req, res) => {
         service.getAllVersions().then((versions) => res.send({
+            "docs": "https://github.com/KennethWussmann/blender-latest-api",
             "versions": versions
         })).catch((err) => handleError(err, res))
     },
