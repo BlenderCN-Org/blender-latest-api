@@ -7,8 +7,8 @@ The API follows this schema
 
 | Example                  | Base URL               | Version (optional) | Platform (optional) | File type (optional) |
 |--------------------------|------------------------|--------------------|---------------------|----------------------|
-| Latest Windows Installer | https://somewhere.com/ | latest/            | windows64/          | msi                  |
-| 2.81a Linux Archive      | https://somewhere.com/ | 2.81/              | linux/              | bz2                  |
+| Latest Windows Installer | https://070wwfoovd.execute-api.eu-central-1.amazonaws.com/dev/ | latest/            | windows64/          | msi                  |
+| 2.81a Linux Archive      | https://070wwfoovd.execute-api.eu-central-1.amazonaws.com/dev/ | 2.81/              | linux/              | bz2                  |
 
 > When you omit an optional parameter the [response will be JSON](#json-response) instead of a redirect to the download.
 
@@ -23,13 +23,13 @@ The API follows this schema
 
 Example terminal command to download the latest version of Blender for Windows 64 bit as MSI (installer):
 ```
-wget https://somewhere.com/latest/windows/zip
+wget https://070wwfoovd.execute-api.eu-central-1.amazonaws.com/dev/latest/windows/zip
 ```
 > You can also omit the `64` or `32` for most recent versions, because `32` bit is no longer available.
 
 Example terminal command to download version 2.79b of Blender for Linux as tar.bz2:
 ```
-wget https://somewhere.com/2.79/linux/bz2
+wget https://070wwfoovd.execute-api.eu-central-1.amazonaws.com/dev/2.79/linux/bz2
 ```
 
 > Notice! You can't provide the a, b, c version, because of the mirror structure. The API will pick the most recent sub-version of your desired version.
@@ -39,7 +39,7 @@ You can also use the API to just find out whats available.
 
 #### List all available versions
 ```
-curl https://somewhere.com/
+curl https://070wwfoovd.execute-api.eu-central-1.amazonaws.com/dev/
 ```
 
 **Example output**
@@ -49,7 +49,7 @@ curl https://somewhere.com/
 
 #### List all downloads available for version
 ```
-curl https://somewhere.com/latest
+curl https://070wwfoovd.execute-api.eu-central-1.amazonaws.com/dev/latest
 ```
 
 **Example output**
@@ -75,7 +75,7 @@ curl https://somewhere.com/latest
 
 #### List of latest Windows downloads
 ```
-curl https://somewhere.com/latest/windows
+curl https://070wwfoovd.execute-api.eu-central-1.amazonaws.com/dev/latest/windows
 ```
 **Example output**
 ```JSON
