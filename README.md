@@ -23,7 +23,7 @@ The API follows this schema
 
 Example terminal command to download the latest version of Blender for Windows 64 bit as MSI (installer):
 ```
-wget https://070wwfoovd.execute-api.eu-central-1.amazonaws.com/dev/latest/windows/zip
+wget https://070wwfoovd.execute-api.eu-central-1.amazonaws.com/dev/latest/windows/msi
 ```
 > You can also omit the `64` or `32` for most recent versions, because `32` bit is no longer available.
 
