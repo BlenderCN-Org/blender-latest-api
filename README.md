@@ -97,3 +97,13 @@ curl https://070wwfoovd.execute-api.eu-central-1.amazonaws.com/dev/latest/window
   ]
 }
 ```
+
+## Deployment
+
+### Deploy to AWS
+* `npm install`
+* `sls deploy`
+
+### Run locally
+* `npm install`
+* `npm start local`
